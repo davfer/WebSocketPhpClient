@@ -1,5 +1,7 @@
 # Gos WebSocket Client
 
+[![Latest Stable Version](https://poser.pugx.org/gos/websocket-client/v/stable)](https://packagist.org/packages/gos/websocket-client) [![Total Downloads](https://poser.pugx.org/gos/websocket-client/downloads)](https://packagist.org/packages/gos/websocket-client) [![License](https://poser.pugx.org/gos/websocket-client/license)](https://packagist.org/packages/gos/websocket-client)
+
 ## About
 
 This library has been tested with Ratchet WAMP server. It can only send messages to the server, listening for replies is not implemented.
