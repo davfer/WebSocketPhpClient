@@ -47,19 +47,24 @@ class Client
     /** @var  string */
     protected $target;
 
+    /** @var  string */
+    protected $token;
+
     /**
      * @param string     $host
      * @param int|string $port
      * @param bool       $secured
      * @param string     $origin
+     * @param string     $token
      */
-    public function __construct($host, $port, $secured = false, $origin = null)
+    public function __construct($host, $port, $secured = false, $origin = null, $token = null)
     {
         $this->serverHost = $host;
         $this->connected = false;
         $this->closing = false;
         $this->secured = $secured;
         $this->serverPort = $port;
+        $this->token = $token;
 
         if (null === $origin) {
             $origin = $host;
@@ -83,11 +88,6 @@ class Client
     public function setLogger(LoggerInterface $logger = null)
     {
         $this->logger = $logger;
-    }
-
-    public function setAuthenticationToken()
-    {
-        /* @todo  **/
     }
 
     /**
@@ -155,8 +155,9 @@ class Client
         $out .= "Sec-WebSocket-Key: $key\r\n";
         $out .= "Sec-WebSocket-Protocol: wamp\r\n";
 
-        //@todo support auth
-//        $out .= "Cookie: PHPSESSID=2okar2mng0mklk62iutc0bert0\r\n";
+        if ($this->token) {
+            $out .= "Cookie: PHPSESSID={$this->token}\r\n";
+        }
 
         $out .= "Sec-WebSocket-Version: 13\r\n";
         $out .= "Origin: {$this->origin}\r\n\r\n";
